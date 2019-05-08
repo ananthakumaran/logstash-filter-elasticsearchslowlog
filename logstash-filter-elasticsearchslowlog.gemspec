@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name          = 'logstash-filter-elasticsearchslowlog'
-  s.version       = '0.1.0'
+  s.version       = '0.2.0'
   s.licenses      = ['Apache-2.0']
   s.summary       = 'elasticsearch slowlog parser'
   s.description   = 'elasticsearch slowlog parser'
