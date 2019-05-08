@@ -32,8 +32,8 @@ describe LogStash::Filters::Elasticsearchslowlog do
     end
   end
 
-  messages = IO.read(File.join(__dir__, 'fixture_valid.txt')).split("\n")
-  source_normalized = IO.read(File.join(__dir__, 'fixture_source_normalized.txt')).split("\n")
+  messages = IO.read(File.join(File.dirname(__FILE__), 'fixture_valid.txt')).split("\n")
+  source_normalized = IO.read(File.join(File.dirname(__FILE__), 'fixture_source_normalized.txt')).split("\n")
   messages.each_with_index do |message, i|
     describe "fixtures_valid #{i}" do
       sample('message' => message) do
@@ -57,7 +57,7 @@ describe LogStash::Filters::Elasticsearchslowlog do
     end
   end
 
-  invalid_messages = IO.read(File.join(__dir__, 'fixture_invalid.txt')).split("\n")
+  invalid_messages = IO.read(File.join(File.dirname(__FILE__), 'fixture_invalid.txt')).split("\n")
   invalid_messages.each_with_index do |message, i|
     describe "fixtures_invalid #{i}" do
       sample('message' => message) do

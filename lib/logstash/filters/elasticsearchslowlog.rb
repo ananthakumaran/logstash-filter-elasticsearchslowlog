@@ -30,7 +30,7 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
     message = event.get(@source)
     if message
       if matches = message.match(SLOWLOG_REGEX)
-        captures = matches.names.zip(matches.captures).to_h
+        captures = Hash[matches.names.zip(matches.captures)]
         captures.each do |key, value|
           next if key == 'key_values'
 
