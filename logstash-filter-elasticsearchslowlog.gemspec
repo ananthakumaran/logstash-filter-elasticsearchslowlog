@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name          = 'logstash-filter-elasticsearchslowlog'
-  s.version       = '0.2.0'
+  s.version       = '0.3.0'
   s.licenses      = ['Apache-2.0']
   s.summary       = 'elasticsearch slowlog parser'
   s.description   = 'elasticsearch slowlog parser'
@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.metadata = { "logstash_plugin" => "true", "logstash_group" => "filter" }
 
   # Gem dependencies
-  s.add_runtime_dependency "deepsort", "~> 0.4"
+  s.add_runtime_dependency "deepsort", "0.4.0"
   s.add_runtime_dependency "logstash-core-plugin-api", "~> 1"
   s.add_development_dependency 'logstash-devutils'
 end
