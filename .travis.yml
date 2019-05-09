@@ -2,4 +2,8 @@ language: ruby
 rvm:
   - jruby
   - jruby-1.7.27
+gemfile:
+  - gemfiles/logstash_core_1.gemfile
+  - gemfiles/logstash_core_1.20.gemfile
+  - gemfiles/logstash_core_2.gemfile
 script: "bundle exec rspec"

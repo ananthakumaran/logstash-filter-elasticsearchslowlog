@@ -27,7 +27,7 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
   SLOWLOG_REGEX = /^\s*\[(?<local_timestamp>[^,]+),\d+\]\s*\[(?<level>.+?)\s*\]\s*\[index.search.slowlog.(?:query|fetch)\]\s*\[(?<node>.+?)\]\s*\[(?<index>.+?)\]\s*\[(?<shard>.+?)\]\s*(?<key_values>.+)$/.freeze
 
   def filter(event)
-    message = event[@source]
+    message = event_get(event, @source)
     if message
       if matches = message.match(SLOWLOG_REGEX)
         captures = Hash[matches.names.zip(matches.captures)]
@@ -37,7 +37,7 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
           if ['shard'].include?(key)
             value = value.to_i
           end
-          event[key] = value
+          event_set(event, key, value)
         end
         if captures['key_values']
           key_values = parse_key_values(captures['key_values'])
@@ -45,7 +45,7 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
             if ['took_millis', 'total_shards'].include?(key)
               value = value.to_i
             end
-            event[key] = value
+            event_set(event, key, value)
           end
 
           source = key_values['source']
@@ -54,8 +54,8 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
             if normalized
               normalized = JSON.dump(normalized)
               source_id = Digest::MD5.hexdigest(normalized)[0..8]
-              event['source_normalized'] = normalized
-              event['source_id'] = source_id.force_encoding("utf-8")
+              event_set(event, 'source_normalized', normalized)
+              event_set(event, 'source_id', source_id.force_encoding("utf-8"))
             end
           end
         end
@@ -63,6 +63,22 @@ class LogStash::Filters::Elasticsearchslowlog < LogStash::Filters::Base
     end
 
     filter_matched(event)
+  end
+
+  def event_get(event, field)
+    if event.respond_to?(:get)
+      event.get(field)
+    else
+      event[field]
+    end
+  end
+
+  def event_set(event, field, value)
+    if event.respond_to?(:set)
+      event.set(field, value)
+    else
+      event[field] = value
+    end
   end
 
   private

@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ..
   specs:
     logstash-filter-elasticsearchslowlog (0.4.0)
       deepsort (= 0.4.0)
@@ -97,6 +97,7 @@ PLATFORMS
 
 DEPENDENCIES
   appraisal
+  logstash-core-plugin-api (~> 1.20)
   logstash-devutils
   logstash-filter-elasticsearchslowlog!
 
