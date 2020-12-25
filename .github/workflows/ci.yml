@@ -12,7 +12,7 @@ jobs:
           - gemfiles/logstash_core_1.20.gemfile
           - gemfiles/logstash_core_2.gemfile
         ruby:
-          - jruby
+          - jruby-9.1.17.0
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
