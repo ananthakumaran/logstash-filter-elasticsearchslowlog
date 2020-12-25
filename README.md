@@ -1,4 +1,4 @@
-# Elasticsearch Slowlog Logstash Plugin [![Build Status](https://travis-ci.org/ananthakumaran/logstash-filter-elasticsearchslowlog.svg?branch=master)](http://travis-ci.org/ananthakumaran/logstash-filter-elasticsearchslowlog)
+# Elasticsearch Slowlog Logstash Plugin
 
 ## Installation
 
